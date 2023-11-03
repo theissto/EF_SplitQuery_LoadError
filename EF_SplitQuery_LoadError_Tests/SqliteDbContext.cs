@@ -3,12 +3,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EF_SplitQuery_LoadError_Tests;
 
-public class PostgreSqlDbContext : DbContext
+public class SqliteDbContext : DbContext
 {
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseNpgsql(
-            @"User ID=SplitQueryTestUser;Server=localhost;Port=5432;Database=EF_SplitQuery_LoadError_Tests;Pooling=true;Include Error Detail=true;Command Timeout=0");
+        optionsBuilder.UseSqlite(@"Data Source=test.db;");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
