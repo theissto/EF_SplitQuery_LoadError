@@ -40,6 +40,8 @@ public class PostgreSqlTests
             var normalQueryResult = await collectionQuery.ToListAsync();
             
             Assert.That(normalQueryResult, Has.Count.EqualTo(1));
+            // Why does this throw a NullReferenceException?
+            // This also happens when query behavior is configured globally and context.Entry().Collection().Load() is called.
             Assert.DoesNotThrowAsync(async () => await collectionQuery.AsSplitQuery().ToListAsync());
 
             var splitQueryResult = await collectionQuery.AsSplitQuery().ToListAsync();
